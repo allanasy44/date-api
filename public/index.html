@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>API</title>
+</head>
+<body>
+  <h1>API for displaying infor </h1>
+  <div id="output"></div>
+
+  <script>
+    // Function to make GET request to the API
+    function fetchData(date = '') {
+      fetch(`/api/${date}`)
+        .then(response => response.json())
+        .then(data => {
+          // Display data in the output div
+          document.getElementById('output').innerHTML = `
+            <p>Unix Timestamp: ${data.unix}</p>
+            <p>UTC Time: ${data.utc}</p>
+          `;
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          // Display error message
+          document.getElementById('output').innerHTML = `<p>Error: ${error.message}</p>`;
+        });
+    }
+
+    // Call fetchData without any date parameter to get current time
+    fetchData();
+  </script>
+  <h1> @alaska</h1>
+</body>
+</html>
